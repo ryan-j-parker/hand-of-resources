@@ -43,4 +43,26 @@ module.exports = class Cat {
     );
     return new Cat(rows[0]);
   }
+
+  static async update(id, newAttrs) {
+    const cat = Cat.getCatById(id);
+    if (!cat) return null;
+    const updatedCat = { ...cat, ...newAttrs };
+    const { row } = await pool.query(
+      `
+        UPDATE cats
+        SET breed = $2, playfulness = $3, intelligence = $4, origin = $5
+        WHERE id = $1
+        RETURNING *    
+    `,
+      [
+        id,
+        updatedCat.breed,
+        updatedCat.playfulness,
+        updatedCat.intelligence,
+        updatedCat.origin,
+      ]
+    );
+    return new Cat(row[0]);
+  }
 };

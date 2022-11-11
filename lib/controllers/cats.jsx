@@ -26,4 +26,12 @@ module.exports = Router()
     } catch (e) {
       next(e);
     }
+  })
+  .put('/:id', async (req, res, next) => {
+    try {
+      const newCat = await Cat.update(req.params.id, req.body);
+      res.json(newCat);
+    } catch (e) {
+      next(e);
+    }
   });

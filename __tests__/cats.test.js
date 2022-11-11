@@ -2,7 +2,6 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
-const Cat = require('../lib/models/Cat');
 
 describe('cats routes', () => {
   beforeEach(() => {
@@ -104,6 +103,11 @@ describe('cats routes', () => {
         "playfulness": 6,
       }
     `);
+  });
+
+  it('PUT /cats/1 should update cat with ID #1', async () => {
+    const res = await request(app).put('/cats/1').send({ origin: 'Olympus Mons, Mars' });
+    expect(res.status).toBe(200);
   });
 
   afterAll(() => {
