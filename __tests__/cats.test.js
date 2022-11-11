@@ -8,7 +8,7 @@ describe('cats routes', () => {
     return setup(pool);
   });
 
-  it('GET /cats should return a list of cat breeds', async () => {
+  it.skip('GET /cats should return a list of cat breeds', async () => {
     const res = await request(app).get('/cats');
     expect(res.status).toBe(200);
     expect(res.body).toMatchInlineSnapshot(`
@@ -73,7 +73,7 @@ describe('cats routes', () => {
     `);
   });
 
-  it('GET /cats/1 should return a cat breed by ID', async () => {
+  it.skip('GET /cats/1 should return a cat breed by ID', async () => {
     const res = await request(app).get('/cats/1');
     expect(res.status).toEqual(200);
     expect(res.body).toEqual({
@@ -85,7 +85,7 @@ describe('cats routes', () => {
     });
   });
 
-  it('POST /cats should add a new cat to database', async () => {
+  it.skip('POST /cats should add a new cat to database', async () => {
     const spacecat = {
       breed: 'Spacecat',
       playfulness: 6,
@@ -105,7 +105,7 @@ describe('cats routes', () => {
     `);
   });
 
-  it('PUT /cats/1 should update cat with ID #1', async () => {
+  it.skip('PUT /cats/1 should update cat with ID #1', async () => {
     const res = await request(app).put('/cats/1').send({ 
       breed: 'Martian Furball',
       playfulness: 4,
@@ -115,7 +115,7 @@ describe('cats routes', () => {
     expect(res.status).toBe(200);
   });
 
-  it.only('DELETE /cats/1 should delete cat with ID #1', async () => {
+  it.skip('DELETE /cats/1 should delete cat with ID #1', async () => {
     const res = await request(app).delete('/cats/1');
     expect(res.status).toBe(204);
 
