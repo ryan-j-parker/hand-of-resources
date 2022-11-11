@@ -21,4 +21,16 @@ module.exports = class Planet {
     const { rows } = await pool.query('SELECT * from planets');
     return rows.map((planet) => new Planet(planet));
   }
+
+  static async getPlanetById(id) {
+    const { rows } = await pool.query(
+      `
+        SELECT * from planets 
+        WHERE 
+        id = $1
+        `,
+      [id]
+    );
+    return new Planet(rows[0]);
+  }
 };
