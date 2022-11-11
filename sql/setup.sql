@@ -20,3 +20,26 @@ VALUES
 ('Sphynx', 4, 4, 'Canada'),
 ('Burmese', 5, 5, 'Burma and Thailand'),
 ('Maine Coon', 4, 4, 'Maine, USA');
+
+DROP TABLE IF EXISTS planets;
+
+CREATE TABLE planets (
+    id BIGINT GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR NOT NULL,
+    mass DECIMAL (7, 6) NOT NULL,
+    radius DECIMAL (5, 4) NOT NULL,
+    period BIGINT NOT NULL,
+    temperature INT NOT NULL
+);
+
+INSERT INTO planets (name, mass, radius, period, temperature)
+VALUES
+('Mercury', 0.000174, 0.0341, 88, 400),
+('Venus', 0.00257, 0.0847, 224.7, 737),
+('Earth', 0.00315, 0.0892, 365.2, 288),
+('Mars', 0.000338, 0.0488, 687, 210),
+('Jupiter', 1, 1, 4331, 165),
+('Saturn', 0.299, 0.843, 10747, 134),
+('Uranus', 0.0456, 0.358, 30589, 76),
+('Neptune', 0.0537, 0.346, 59800, 72),
+('Pluto', 0.000007, 0.0166, 90560, 44);

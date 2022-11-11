@@ -2,7 +2,6 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
-const { JsonWebTokenError } = require('jsonwebtoken');
 
 describe('cats routes', () => {
   beforeEach(() => {
@@ -114,6 +113,14 @@ describe('cats routes', () => {
       origin: 'Mars',
     });
     expect(res.status).toBe(200);
+  });
+
+  it.only('DELETE /cats/1 should delete cat with ID #1', async () => {
+    const res = await request(app).delete('/cats/1');
+    expect(res.status).toBe(204);
+
+    const getRes = await request(app).get('/cats/1');
+    expect(getRes.status).toBe(404);
   });
 
   afterAll(() => {

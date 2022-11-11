@@ -65,4 +65,16 @@ module.exports = class Cat {
     );
     return new Cat(rows[0]);
   }
+
+  static async delete(id) {
+    const { rows } = await pool.query(
+      `
+        DELETE from cats
+        WHERE id = $1
+        RETURNING *
+        `,
+      [id]
+    );
+    return new Cat(rows[0]);
+  }
 };
