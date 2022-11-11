@@ -89,6 +89,19 @@ describe('planets routes', () => {
     `);
   });
 
+  it('GET /planets/1 should return planet with ID #1', async () => {
+    const res = await request(app).get('/planets/1');
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      id: '1',
+      name: 'Mercury',
+      mass: 0.000174,
+      radius: 0.0341,
+      period: 88,
+      temperature: 400,
+    });
+  });
+
   afterAll(() => {
     pool.end();
   });
