@@ -118,15 +118,22 @@ describe('planets routes', () => {
     `);
   });
 
-  it('PUT /planets/1 should update planet with ID #9', async () => {
+  it.skip('PUT /planets/9 should update planet with ID #9', async () => {
     const res = await request(app).put('/planets/9').send({
       name: 'Alien Home Planet',
-      mass: 0.9982,
-      radius: 0.00324,
+      mass: 0.99822,
+      radius: 0.0034,
       period: 332,
       temperature: 43,
     });
     expect(res.status).toBe(200);
+  });
+
+  it('DELETE /planets/9 should delete planet with ID #9', async () => {
+    const res = await request(app).delete('/planets/9');
+    expect(res.status).toBe(200);
+    const planet = await request(app).get('/planets/9');
+    expect(planet.body).toBe(null);
   });
 
   afterAll(() => {
