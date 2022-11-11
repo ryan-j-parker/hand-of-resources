@@ -96,6 +96,28 @@ describe('planets routes', () => {
     expect(res.body).toHaveProperty('temperature', 400);
   });
 
+  it('POST /planets should add a new planet to database', async () => {
+    const planetX = {
+      name: 'Planet X',
+      mass: 0.0999,
+      radius: 0.0999,
+      period: 99999,
+      temperature: 2,
+    };
+    const res = await request(app).post('/planets').send(planetX);
+    expect(res.status).toBe(200);
+    expect(res.body).toMatchInlineSnapshot(`
+      Object {
+        "id": "10",
+        "mass": "0.099900",
+        "name": "Planet X",
+        "period": "99999",
+        "radius": "0.0999",
+        "temperature": 2,
+      }
+    `);
+  });
+
   afterAll(() => {
     pool.end();
   });

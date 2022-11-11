@@ -18,4 +18,12 @@ module.exports = Router()
     } catch (e) {
       next(e);
     }
+  })
+  .post('/', async (req, res, next) => {
+    try {
+      const planet = await Planet.insert(req.body);
+      res.json(planet);
+    } catch (e) {
+      next(e);
+    }
   });

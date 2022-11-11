@@ -1,4 +1,5 @@
 const pool = require('../utils/pool');
+const { insert } = require('./Cat');
 
 module.exports = class Planet {
   id;
@@ -30,6 +31,24 @@ module.exports = class Planet {
         id = $1
         `,
       [id]
+    );
+    return new Planet(rows[0]);
+  }
+
+  static async insert(planet) {
+    const { rows } = await pool.query(
+      `
+        INSERT INTO planets (name, mass, radius, period, temperature)
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING *
+        `,
+      [
+        planet.name,
+        planet.mass,
+        planet.radius,
+        planet.period,
+        planet.temperature,
+      ]
     );
     return new Planet(rows[0]);
   }
