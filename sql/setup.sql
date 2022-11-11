@@ -7,19 +7,16 @@ CREATE TABLE cats (
     breed VARCHAR NOT NULL,
     playfulness INT NOT NULL,
     intelligence INT NOT NULL,
-    origin VARCHAR NOT NULL,
-    health INT NOT NULL,
-    shedding INT NOT NULL,
-    pet_friendly INT NOT NULL
+    origin VARCHAR NOT NULL
 );
 
-INSERT INTO cats (breed, playfulness, intelligence, origin, health, shedding, pet_friendly)
+INSERT INTO cats (breed, playfulness, intelligence, origin)
 VALUES
-('Abyssinian', 5, 5, 'Southeast Asia', 2, 3, 5),
-('Russian Blue', 2, 4, 'Archangel Islands, Russia', 4, 4, 4),
-('Scottish Fold', 3, 4, 'Tayside, Scotland', 3, 3, 4),
-('British Shorthair', 2, 3, 'Great Britain', 4, 3, 5),
-('Ragdoll', 4, 4, 'Riverside, California', 3, 4, 4),
-('Sphynx', 4, 4, 'Canada', 2, 1, 5),
-('Burmese', 5, 5, 'Burma and Thailand', 1, 2, 5),
-('Maine Coon', 4, 4, 'Maine, USA', 3, 4, 5);
+('Abyssinian', 5, 5, 'Southeast Asia'),
+('Russian Blue', 2, 4, 'Archangel Islands, Russia'),
+('Scottish Fold', 3, 4, 'Tayside, Scotland'),
+('British Shorthair', 2, 3, 'Great Britain'),
+('Ragdoll', 4, 4, 'Riverside, California'),
+('Sphynx', 4, 4, 'Canada'),
+('Burmese', 5, 5, 'Burma and Thailand'),
+('Maine Coon', 4, 4, 'Maine, USA');
