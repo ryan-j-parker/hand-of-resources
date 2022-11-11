@@ -34,4 +34,12 @@ module.exports = Router()
     } catch (e) {
       next(e);
     }
+  })
+  .delete('/:id', async (req, res, next) => {
+    try {
+      const planet = await Planet.delete(req.params.id);
+      res.json(planet);
+    } catch (e) {
+      next(e);
+    }
   });

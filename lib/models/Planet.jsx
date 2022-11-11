@@ -1,7 +1,5 @@
 const pool = require('../utils/pool');
-const { insert } = require('./Cat');
-
-module.exports = class Planet {
+class Planet {
   id;
   name;
   mass;
@@ -75,4 +73,18 @@ module.exports = class Planet {
     );
     return new Planet(rows[0]);
   }
-};
+
+  static async delete(id) {
+    const { rows } = await pool.query(
+      `
+        DELETE from planets
+        WHERE id = $1
+        RETURNING *    
+        `,
+      [id]
+    );
+    return new Planet(rows[0]);
+  }
+}
+
+module.exports = { Planet };
