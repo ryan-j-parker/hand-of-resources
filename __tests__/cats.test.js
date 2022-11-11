@@ -86,6 +86,26 @@ describe('cats routes', () => {
     });
   });
 
+  it('POST /cats should add a new cat to database', async () => {
+    const spacecat = {
+      breed: 'Spacecat',
+      playfulness: 6,
+      intelligence: 9,
+      origin: 'Proxima Centauri',
+    };
+    const res = await request(app).post('/cats').send(spacecat);
+    expect(res.status).toBe(200);
+    expect(res.body).toMatchInlineSnapshot(`
+      Object {
+        "breed": "Spacecat",
+        "id": "9",
+        "intelligence": 9,
+        "origin": "Proxima Centauri",
+        "playfulness": 6,
+      }
+    `);
+  });
+
   afterAll(() => {
     pool.end();
   });

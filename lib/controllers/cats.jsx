@@ -11,7 +11,19 @@ module.exports = Router()
       next(e);
     }
   })
-  .get('/', async (req, res) => {
-    const cats = await Cat.getCats();
-    res.json(cats);
+  .get('/', async (req, res, next) => {
+    try {
+      const cats = await Cat.getCats();
+      res.json(cats);
+    } catch (e) {
+      next(e);
+    }
+  })
+  .post('/', async (req, res, next) => {
+    try {
+      const cat = await Cat.insert(req.body);
+      res.json(cat);
+    } catch (e) {
+      next(e);
+    }
   });

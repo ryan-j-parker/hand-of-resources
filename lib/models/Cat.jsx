@@ -6,7 +6,7 @@ module.exports = class Cat {
   playfulness;
   intelligence;
   origin;
-  
+
   constructor(row) {
     this.id = row.id;
     this.breed = row.breed;
@@ -28,6 +28,18 @@ module.exports = class Cat {
     id = $1
     `,
       [id]
+    );
+    return new Cat(rows[0]);
+  }
+
+  static async insert(cat) {
+    const { rows } = await pool.query(
+      `
+    INSERT INTO cats (breed, playfulness, intelligence, origin)
+    VALUES ($1, $2, $3, $4)
+    RETURNING *
+    `,
+      [cat.breed, cat.playfulness, cat.intelligence, cat.origin]
     );
     return new Cat(rows[0]);
   }
