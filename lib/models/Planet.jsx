@@ -52,4 +52,27 @@ module.exports = class Planet {
     );
     return new Planet(rows[0]);
   }
+
+  static async update(id, newAttrs) {
+    const planet = Planet.getPlanetById(id);
+    if (!planet) return null;
+    const updatedPlanet = { ...planet, ...newAttrs };
+    const { rows } = await pool.query(
+      `
+        UPDATE planets
+        SET name = $2, mass = $3, radius = $4, period = $5, temperature = $6
+        WHERE id = $1
+        RETURNING *
+        `,
+      [
+        id,
+        updatedPlanet.name,
+        updatedPlanet.mass,
+        updatedPlanet.radius,
+        updatedPlanet.period,
+        updatedPlanet.temperature,
+      ]
+    );
+    return new Planet(rows[0]);
+  }
 };

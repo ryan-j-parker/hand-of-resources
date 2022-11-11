@@ -26,4 +26,12 @@ module.exports = Router()
     } catch (e) {
       next(e);
     }
+  })
+  .put('/:id', async (req, res, next) => {
+    try {
+      const planet = await Planet.update(req.params.id, req.body);
+      res.json(planet);
+    } catch (e) {
+      next(e);
+    }
   });

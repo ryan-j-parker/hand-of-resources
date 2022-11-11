@@ -89,14 +89,14 @@ describe('planets routes', () => {
     `);
   });
 
-  it('GET /planets/1 should return planet with ID #1', async () => {
+  it.skip('GET /planets/1 should return planet with ID #1', async () => {
     const res = await request(app).get('/planets/1');
     expect(res.status).toBe(200);
     expect(res.body).toHaveProperty('name', 'Mercury');
     expect(res.body).toHaveProperty('temperature', 400);
   });
 
-  it('POST /planets should add a new planet to database', async () => {
+  it.skip('POST /planets should add a new planet to database', async () => {
     const planetX = {
       name: 'Planet X',
       mass: 0.0999,
@@ -116,6 +116,17 @@ describe('planets routes', () => {
         "temperature": 2,
       }
     `);
+  });
+
+  it('PUT /planets/1 should update planet with ID #9', async () => {
+    const res = await request(app).put('/planets/9').send({
+      name: 'Alien Home Planet',
+      mass: 0.9982,
+      radius: 0.00324,
+      period: 332,
+      temperature: 43,
+    });
+    expect(res.status).toBe(200);
   });
 
   afterAll(() => {
