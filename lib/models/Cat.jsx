@@ -48,7 +48,7 @@ module.exports = class Cat {
     const cat = Cat.getCatById(id);
     if (!cat) return null;
     const updatedCat = { ...cat, ...newAttrs };
-    const { row } = await pool.query(
+    const { rows } = await pool.query(
       `
         UPDATE cats
         SET breed = $2, playfulness = $3, intelligence = $4, origin = $5
@@ -63,6 +63,6 @@ module.exports = class Cat {
         updatedCat.origin,
       ]
     );
-    return new Cat(row[0]);
+    return new Cat(rows[0]);
   }
 };
