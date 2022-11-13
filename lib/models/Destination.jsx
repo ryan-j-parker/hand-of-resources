@@ -21,4 +21,16 @@ module.exports = class Destination {
     const { rows } = await pool.query('SELECT * from destinations');
     return rows.map((destination) => new Destination(destination));
   }
-}
+
+  static async getDestinationById(id) {
+    const { rows } = await pool.query(
+      `
+        SELECT * from destinations
+        WHERE
+        id = $1
+        `,
+      [id]
+    );
+    return new Destination(rows[0]);
+  }
+};
