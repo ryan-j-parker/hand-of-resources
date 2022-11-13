@@ -87,7 +87,7 @@ describe('gangs routes', () => {
     expect(res.body).toHaveProperty('formed', 1825);
   });
 
-  it('POST /gangs should add a new gang entry to database', async () => {
+  it.skip('POST /gangs should add a new gang entry to database', async () => {
     const kerry = {
       name: 'Kerryonians',
       formed: 1825,
@@ -112,7 +112,7 @@ describe('gangs routes', () => {
   });
 
   //
-  it('PUT /gangs/1 should update gang with ID #1', async () => {
+  it.skip('PUT /gangs/1 should update gang with ID #1', async () => {
     const res = await request(app).put('/gangs/1').send({
       name: 'Five Points Gang',
       formed: 1890,
@@ -133,6 +133,14 @@ describe('gangs routes', () => {
         "territory": "Lower Manhattan",
       }
     `);
+  });
+
+  it.skip('DELETE /gangs/1 should delete gang with ID #1', async () => {
+    const res = await request(app).delete('/gangs/1');
+    expect(res.status).toBe(204);
+
+    const getRes = await request(app).get('/gangs/1');
+    expect(getRes.status).toBe(404);
   });
 
   afterAll(() => {

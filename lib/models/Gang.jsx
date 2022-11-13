@@ -77,4 +77,16 @@ module.exports = class Gang {
     );
     return new Gang(rows[0]);
   }
+
+  static async delete(id) {
+    const { rows } = await pool.query(
+      `
+        DELETE from gangs_of_ny
+        WHERE id = $1
+        RETURNING *
+        `,
+      [id]
+    );
+    return new Gang(rows[0]);
+  }
 };
