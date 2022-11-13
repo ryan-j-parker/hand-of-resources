@@ -126,6 +126,28 @@ describe('zodiac routes', () => {
     });
   });
 
+  it('POST /zodiac should add a new zodiac sign to database', async () => {
+    const mouse = {
+      animal: 'Mouse',
+      yinyang: 'Yin and Yang',
+      trine: 1,
+      element: 'Catness',
+      year: '03-18-2013 - always',
+    };
+    const res = await request(app).post('/zodiac').send(mouse);
+    expect(res.status).toBe(200);
+    expect(res.body).toMatchInlineSnapshot(`
+      Object {
+        "animal": "Mouse",
+        "element": "Catness",
+        "id": "13",
+        "trine": 1,
+        "year": "03-18-2013 - always",
+        "yinyang": "Yin and Yang",
+      }
+    `);
+  });
+
   afterAll(() => {
     pool.end();
   });

@@ -32,4 +32,16 @@ module.exports = class Zodiac {
     );
     return new Zodiac(rows[0]);
   }
+
+  static async insert(zodiac) {
+    const { rows } = await pool.query(
+      `
+        INSERT INTO chinese_zodiac (animal, yinyang, trine, element, year)
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING *
+        `,
+      [zodiac.animal, zodiac.yinyang, zodiac.trine, zodiac.element, zodiac.year]
+    );
+    return new Zodiac(rows[0]);
+  }
 };

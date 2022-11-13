@@ -18,4 +18,12 @@ module.exports = Router()
     } catch (e) {
       next(e);
     }
+  })
+  .post('/', async (req, res, next) => {
+    try {
+      const zodiac = await Zodiac.insert(req.body);
+      res.json(zodiac);
+    } catch (e) {
+      next(e);
+    }
   });
