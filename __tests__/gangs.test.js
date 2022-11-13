@@ -80,11 +80,59 @@ describe('gangs routes', () => {
     `);
   });
 
-  it('GET /gangs/1 should return the NY gang with ID #1', async () => {
+  it.skip('GET /gangs/1 should return the NY gang with ID #1', async () => {
     const res = await request(app).get('/gangs/1');
     expect(res.status).toBe(200);
     expect(res.body).toHaveProperty('name', 'Forty Thieves');
     expect(res.body).toHaveProperty('formed', 1825);
+  });
+
+  it('POST /gangs should add a new gang entry to database', async () => {
+    const kerry = {
+      name: 'Kerryonians',
+      formed: 1825,
+      dissolved: 1833,
+      member: 'Stabby McKnife',
+      territory: 'Lower East Side',
+      makeup: 'Irish',
+    };
+    const res = await request(app).post('/gangs').send(kerry);
+    expect(res.status).toBe(200);
+    expect(res.body).toMatchInlineSnapshot(`
+      Object {
+        "dissolved": 1833,
+        "formed": 1825,
+        "id": "8",
+        "makeup": "Irish",
+        "member": "Stabby McKnife",
+        "name": "Kerryonians",
+        "territory": "Lower East Side",
+      }
+    `);
+  });
+
+  //
+  it('PUT /gangs/1 should update gang with ID #1', async () => {
+    const res = await request(app).put('/gangs/1').send({
+      name: 'Five Points Gang',
+      formed: 1890,
+      dissolved: 1929,
+      member: 'Paul Kelly',
+      territory: 'Lower Manhattan',
+      makeup: 'Italian',
+    });
+    expect(res.status).toBe(200);
+    expect(res.body).toMatchInlineSnapshot(`
+      Object {
+        "dissolved": 1929,
+        "formed": 1890,
+        "id": "1",
+        "makeup": "Italian",
+        "member": "Paul Kelly",
+        "name": "Five Points Gang",
+        "territory": "Lower Manhattan",
+      }
+    `);
   });
 
   afterAll(() => {
