@@ -91,3 +91,28 @@ VALUES
 ('Rooster', 'Yin', 2, 'Metal', '01-23-1993 - 02-09-1994'),
 ('Dog', 'Yang', 3, 'Earth', '02-10-1994 - 01-30-1995'),
 ('Pig', 'Yin', 4, 'Water', '01-31-1995 - 02-18-1996');
+
+DROP TABLE IF EXISTS destinations;
+
+CREATE TABLE destinations (
+    id BIGINT GENERATED ALWAYS AS IDENTITY,
+    country VARCHAR NOT NULL,
+    monthly_expenses INT NOT NULL,
+    language VARCHAR NOT NULL,
+    income_req INT NOT NULL,
+    visa_cost INT NOT NULL
+);
+
+INSERT INTO destinations (country, monthly_expenses, language, income_req, visa_cost)
+VALUES
+('Costa Rica', 1300, 'Spanish', 3000, 190),
+('Malta', 1400, 'Maltese, English', 2750, 305),
+('Greece', 1050, 'Greek', 3565, 76),
+('Mexico', 875, 'Spanish', 2730, 190),
+('Portugal', 1350, 'Portuguese', 717, 77),
+('Estonia', 1205, 'Estonian', 3568, 81),
+('Croatia', 1050, 'Croatian', 2400, 180),
+('Saint Lucia', 1400, 'English, French Creole', 0, 46),
+('Brazil', 750, 'Portuguese', 1500, 100),
+('Mauritius', 900, 'Mauritian Creole, English, French', 1500, 0);
+

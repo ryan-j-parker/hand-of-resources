@@ -67,4 +67,16 @@ module.exports = class Zodiac {
     );
     return new Zodiac(rows[0]);
   }
+
+  static async delete(id) {
+    const { rows } = await pool.query(
+      `
+        DELETE from chinese_zodiac
+        WHERE id = $1
+        RETURNING * 
+        `,
+      [id]
+    );
+    return new Zodiac(rows[0]);
+  }
 };

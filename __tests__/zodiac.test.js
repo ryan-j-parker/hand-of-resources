@@ -148,7 +148,7 @@ describe('zodiac routes', () => {
     `);
   });
 
-  it('PUT /zodiac/1 should update cat with ID #1', async () => {
+  it.skip('PUT /zodiac/1 should update cat with ID #1', async () => {
     const res = await request(app).put('/zodiac/1').send({
       animal: 'Frog',
       yinyang: 'Yin',
@@ -157,6 +157,14 @@ describe('zodiac routes', () => {
       year: '02-12-1983 - 03-22-2092',
     });
     expect(res.status).toBe(200);
+  });
+
+  it.skip('DELETE /zodiac/12 should delete zodiac with ID #12', async () => {
+    const res = await request(app).delete('/zodiac/12');
+    expect(res.status).toBe(204);
+
+    const getRes = await request(app).get('/zodiac/12');
+    expect(getRes.status).toBe(404);
   });
 
   afterAll(() => {
