@@ -113,6 +113,19 @@ describe('zodiac routes', () => {
     `);
   });
 
+  it('GET /zodiac/1 should return zodiac sign with ID #1', async () => {
+    const res = await request(app).get('/zodiac/1');
+    expect(res.status).toEqual(200);
+    expect(res.body).toEqual({
+      id: '1',
+      animal: 'Rat',
+      yinyang: 'Yang',
+      trine: 1,
+      element: 'Water',
+      year: '02-02-1984 - 02-19-1985',
+    });
+  });
+
   afterAll(() => {
     pool.end();
   });

@@ -21,4 +21,15 @@ module.exports = class Zodiac {
     const { rows } = await pool.query('SELECT * from chinese_zodiac');
     return rows.map((zodiac) => new Zodiac(zodiac));
   }
+
+  static async getZodiacById(id) {
+    const { rows } = await pool.query(
+      `
+        SELECT * from chinese_zodiac
+        WHERE id = $1
+        `,
+      [id]
+    );
+    return new Zodiac(rows[0]);
+  }
 };
