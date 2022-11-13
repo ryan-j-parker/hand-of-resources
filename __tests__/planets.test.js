@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const { Planet } = require('../lib/models/Planet');
 
 describe('planets routes', () => {
   beforeEach(() => {
@@ -129,11 +130,11 @@ describe('planets routes', () => {
     expect(res.status).toBe(200);
   });
 
-  it.skip('DELETE /planets/9 should delete planet with ID #9', async () => {
+  it('DELETE /planets/:id should delete a planet', async () => {
     const res = await request(app).delete('/planets/9');
-    expect(res.status).toBe(200);
-    const planet = await request(app).get('/planets/9');
-    expect(planet.body).toBe(null);
+    expect(res.status).toEqual(204);
+    const { planet } = await Planet.getPlanetById(9);
+    expect(planet).toEqual(undefined);
   });
 
   afterAll(() => {

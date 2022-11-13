@@ -37,8 +37,8 @@ module.exports = Router()
   })
   .delete('/:id', async (req, res, next) => {
     try {
-      const planet = await Planet.delete(req.params.id);
-      res.json(planet);
+      res.send(await Planet.delete(req.params.id));
+      res.status(200);
     } catch (e) {
       next(e);
     }

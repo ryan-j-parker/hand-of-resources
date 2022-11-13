@@ -34,4 +34,12 @@ module.exports = Router()
     } catch (e) {
       next(e);
     }
+  })
+  .delete('/:id', async (req, res, next) => {
+    try {
+      res.send(await Destination.delete(req.params.id));
+      res.status(200);
+    } catch (e) {
+      next(e);
+    }
   });

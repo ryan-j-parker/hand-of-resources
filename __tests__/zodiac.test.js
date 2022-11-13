@@ -159,12 +159,11 @@ describe('zodiac routes', () => {
     expect(res.status).toBe(200);
   });
 
-  it.skip('DELETE /zodiac/12 should delete zodiac with ID #12', async () => {
+  it.skip('DELETE /zodiac/:id should delete a zodiac sign', async () => {
     const res = await request(app).delete('/zodiac/12');
-    expect(res.status).toBe(204);
-
-    const getRes = await request(app).get('/zodiac/12');
-    expect(getRes.status).toBe(404);
+    expect(res.status).toEqual(200);
+    const { zodiac } = await request(app).get('/zodiac/12');
+    expect(zodiac).toEqual(undefined);
   });
 
   afterAll(() => {

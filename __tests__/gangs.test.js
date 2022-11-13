@@ -137,10 +137,9 @@ describe('gangs routes', () => {
 
   it.skip('DELETE /gangs/1 should delete gang with ID #1', async () => {
     const res = await request(app).delete('/gangs/1');
-    expect(res.status).toBe(204);
-
-    const getRes = await request(app).get('/gangs/1');
-    expect(getRes.status).toBe(404);
+    expect(res.status).toEqual(200);
+    const { gang } = await request(app).get('/gangs/1');
+    expect(gang).toEqual(undefined);
   });
 
   afterAll(() => {

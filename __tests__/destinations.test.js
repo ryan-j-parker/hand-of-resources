@@ -132,7 +132,7 @@ describe('destination routes', () => {
     `);
   });
 
-  it('PUT /destinations/1 should update destination with ID #1', async () => {
+  it.skip('PUT /destinations/1 should update destination with ID #1', async () => {
     const res = await request(app).put('/destinations/1').send({
       country: 'Seychelles',
       monthly_expenses: 2400,
@@ -141,6 +141,13 @@ describe('destination routes', () => {
       visa_cost: 55,
     });
     expect(res.status).toBe(200);
+  });
+
+  it.skip('DELETE /destinations/:id should delete a destination', async () => {
+    const res = await request(app).delete('/destinations/8');
+    expect(res.status).toEqual(200);
+    const { dest } = await request(app).get('/destinations/8');
+    expect(dest).toEqual(undefined);
   });
 
   afterAll(() => {

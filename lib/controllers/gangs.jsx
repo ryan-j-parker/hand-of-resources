@@ -38,9 +38,8 @@ module.exports = Router()
   })
   .delete('/:id', async (req, res, next) => {
     try {
-      await Gang.delete(req.params.id);
-      res.status(204);
-      res.send();
+      res.send(await Gang.delete(req.params.id));
+      res.status(200);
     } catch (e) {
       next(e);
     }

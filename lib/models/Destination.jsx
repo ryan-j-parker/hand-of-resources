@@ -74,4 +74,16 @@ module.exports = class Destination {
     );
     return new Destination(rows[0]);
   }
+
+  static async delete(id) {
+    const { rows } = await pool.query(
+      `
+        DELETE from destinations
+        WHERE id = $1
+        RETURNING *
+        `,
+      [id]
+    );
+    return new Destination(rows[0]);
+  }
 };

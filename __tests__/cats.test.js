@@ -106,7 +106,7 @@ describe('cats routes', () => {
   });
 
   it.skip('PUT /cats/1 should update cat with ID #1', async () => {
-    const res = await request(app).put('/cats/1').send({ 
+    const res = await request(app).put('/cats/1').send({
       breed: 'Martian Furball',
       playfulness: 4,
       intelligence: 4,
@@ -117,10 +117,10 @@ describe('cats routes', () => {
 
   it.skip('DELETE /cats/1 should delete cat with ID #1', async () => {
     const res = await request(app).delete('/cats/1');
-    expect(res.status).toBe(204);
+    expect(res.status).toEqual(200);
 
-    const getRes = await request(app).get('/cats/1');
-    expect(getRes.status).toBe(404);
+    const { cat } = await request(app).get('/cats/1');
+    expect(cat).toEqual(undefined);
   });
 
   afterAll(() => {
