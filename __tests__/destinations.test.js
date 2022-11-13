@@ -97,7 +97,7 @@ describe('destination routes', () => {
     `);
   });
 
-  it('GET /destinations/1 should return destination with ID #1', async () => {
+  it.skip('GET /destinations/1 should return destination with ID #1', async () => {
     const res = await request(app).get('/destinations/1');
     expect(res.status).toEqual(200);
     expect(res.body).toEqual({
@@ -108,6 +108,28 @@ describe('destination routes', () => {
       income_req: 3000,
       visa_cost: 190,
     });
+  });
+
+  it('POST /destinations should add a new destination', async () => {
+    const seychelles = {
+      country: 'Seychelles',
+      monthly_expenses: 2400,
+      language: 'English',
+      income_req: 4500,
+      visa_cost: 55,
+    };
+    const res = await request(app).post('/destinations').send(seychelles);
+    expect(res.status).toEqual(200);
+    expect(res.body).toMatchInlineSnapshot(`
+      Object {
+        "country": "Seychelles",
+        "id": "11",
+        "income_req": 4500,
+        "language": "English",
+        "monthly_expenses": 2400,
+        "visa_cost": 55,
+      }
+    `);
   });
 
   afterAll(() => {

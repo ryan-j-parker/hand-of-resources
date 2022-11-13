@@ -33,4 +33,22 @@ module.exports = class Destination {
     );
     return new Destination(rows[0]);
   }
+
+  static async insert(dest) {
+    const { rows } = await pool.query(
+      `
+        INSERT INTO destinations (country, monthly_expenses, language, income_req, visa_cost)
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING *
+        `,
+      [
+        dest.country,
+        dest.monthly_expenses,
+        dest.language,
+        dest.income_req,
+        dest.visa_cost,
+      ]
+    );
+    return new Destination(rows[0]);
+  }
 };
