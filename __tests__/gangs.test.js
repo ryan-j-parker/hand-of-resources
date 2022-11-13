@@ -8,7 +8,7 @@ describe('gangs routes', () => {
     return setup(pool);
   });
 
-  it('GET /gangs should return a list of 19th C. NY gangs', async () => {
+  it.skip('GET /gangs should return a list of 19th C. NY gangs', async () => {
     const res = await request(app).get('/gangs');
     expect(res.status).toBe(200);
     expect(res.body).toMatchInlineSnapshot(`
@@ -78,6 +78,13 @@ describe('gangs routes', () => {
         },
       ]
     `);
+  });
+
+  it('GET /gangs/1 should return the NY gang with ID #1', async () => {
+    const res = await request(app).get('/gangs/1');
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty('name', 'Forty Thieves');
+    expect(res.body).toHaveProperty('formed', 1825);
   });
 
   afterAll(() => {

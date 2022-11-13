@@ -23,4 +23,15 @@ module.exports = class Gang {
     const { rows } = await pool.query('SELECT * from gangs_of_ny');
     return rows.map((gang) => new Gang(gang));
   }
+
+  static async getGangById(id) {
+    const { rows } = await pool.query(
+      `
+        SELECT * from gangs_of_ny
+        WHERE id = $1
+        `,
+      [id]
+    );
+    return new Gang(rows[0]);
+  }
 };
