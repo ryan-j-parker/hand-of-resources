@@ -129,7 +129,7 @@ describe('planets routes', () => {
     expect(res.status).toBe(200);
   });
 
-  it('DELETE /planets/9 should delete planet with ID #9', async () => {
+  it.skip('DELETE /planets/9 should delete planet with ID #9', async () => {
     const res = await request(app).delete('/planets/9');
     expect(res.status).toBe(200);
     const planet = await request(app).get('/planets/9');

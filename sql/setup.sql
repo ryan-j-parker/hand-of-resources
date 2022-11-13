@@ -43,3 +43,25 @@ VALUES
 ('Uranus', 0.0456, 0.358, 30589, 76),
 ('Neptune', 0.0537, 0.346, 59800, 72),
 ('Pluto', 0.000007, 0.0166, 90560, 44);
+
+DROP TABLE IF EXISTS gangs_of_ny;
+
+CREATE TABLE gangs_of_ny (
+    id BIGINT GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR NOT NULL,
+    formed INT NOT NULL,
+    dissolved INT NOT NULL,
+    member VARCHAR NOT NULL,
+    territory VARCHAR NOT NULL,
+    makeup VARCHAR NOT NULL
+);
+
+INSERT INTO gangs_of_ny (name, formed, dissolved, member, territory, makeup)
+VALUES
+('Forty Thieves', 1825, 1850, 'Edward Coleman', 'Lower East Side', 'Irish'),
+('Bowery Boys', 1830, 1865, 'Mike Walsh', 'The Bowery', 'American Nativists'),
+('Whyos', 1860, 1890, 'Danny Lyons', 'The Bowery', 'Irish'),
+('Daybreak Boys', 1845, 1859, 'Nicholas Saul', 'Manhattan Waterfront', 'Juveniles'),
+('Dead Rabbits', 1834, 1865, 'Hell-cat Maggie', 'Five Points', 'Irish, Irish-American'),
+('Short Tails', 1880, 1890, 'unknown', 'Corlears Hook', 'Irish'),
+('Eastman Gang', 1890, 1912, 'Monk Eastman', 'Lower East Side', 'Jewish-American');

@@ -1,0 +1,26 @@
+const pool = require('../utils/pool');
+
+module.exports = class Gang {
+  id;
+  name;
+  formed;
+  dissolved;
+  member;
+  territory;
+  makeup;
+
+  constructor(row) {
+    this.id = row.id;
+    this.name = row.name;
+    this.formed = row.formed;
+    this.dissolved = row.dissolved;
+    this.member = row.member;
+    this.territory = row.territory;
+    this.makeup = row.makeup;
+  }
+
+  static async getGangs() {
+    const { rows } = await pool.query('SELECT * from gangs_of_ny');
+    return rows.map((gang) => new Gang(gang));
+  }
+};
