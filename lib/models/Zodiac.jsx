@@ -44,4 +44,27 @@ module.exports = class Zodiac {
     );
     return new Zodiac(rows[0]);
   }
+
+  static async update(id, newAttrs) {
+    const zodiac = Zodiac.getZodiacById(id);
+    if (!zodiac) return null;
+    const updatedZodiac = { ...zodiac, ...newAttrs };
+    const { rows } = await pool.query(
+      `
+    UPDATE chinese_zodiac
+    SET animal = $2, yinyang = $3, trine = $4, element = $5, year = $6
+    WHERE id = $1
+    RETURNING *
+    `,
+      [
+        id,
+        updatedZodiac.animal,
+        updatedZodiac.yinyang,
+        updatedZodiac.trine,
+        updatedZodiac.element,
+        updatedZodiac.year,
+      ]
+    );
+    return new Zodiac(rows[0]);
+  }
 };

@@ -26,4 +26,12 @@ module.exports = Router()
     } catch (e) {
       next(e);
     }
+  })
+  .put('/:id', async (req, res, next) => {
+    try {
+      const newZodiac = await Zodiac.update(req.params.id, req.body);
+      res.json(newZodiac);
+    } catch (e) {
+      next(e);
+    }
   });

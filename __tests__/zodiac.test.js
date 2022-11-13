@@ -8,7 +8,7 @@ describe('zodiac routes', () => {
     return setup(pool);
   });
 
-  it('GET /zodiac should return a list of chinese zodiac signs', async () => {
+  it.skip('GET /zodiac should return a list of chinese zodiac signs', async () => {
     const res = await request(app).get('/zodiac');
     expect(res.status).toBe(200);
     expect(res.body).toMatchInlineSnapshot(`
@@ -113,7 +113,7 @@ describe('zodiac routes', () => {
     `);
   });
 
-  it('GET /zodiac/1 should return zodiac sign with ID #1', async () => {
+  it.skip('GET /zodiac/1 should return zodiac sign with ID #1', async () => {
     const res = await request(app).get('/zodiac/1');
     expect(res.status).toEqual(200);
     expect(res.body).toEqual({
@@ -126,7 +126,7 @@ describe('zodiac routes', () => {
     });
   });
 
-  it('POST /zodiac should add a new zodiac sign to database', async () => {
+  it.skip('POST /zodiac should add a new zodiac sign to database', async () => {
     const mouse = {
       animal: 'Mouse',
       yinyang: 'Yin and Yang',
@@ -146,6 +146,17 @@ describe('zodiac routes', () => {
         "yinyang": "Yin and Yang",
       }
     `);
+  });
+
+  it('PUT /zodiac/1 should update cat with ID #1', async () => {
+    const res = await request(app).put('/zodiac/1').send({
+      animal: 'Frog',
+      yinyang: 'Yin',
+      trine: 3,
+      element: 'Water',
+      year: '02-12-1983 - 03-22-2092',
+    });
+    expect(res.status).toBe(200);
   });
 
   afterAll(() => {
