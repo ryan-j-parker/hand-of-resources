@@ -110,7 +110,7 @@ describe('destination routes', () => {
     });
   });
 
-  it('POST /destinations should add a new destination', async () => {
+  it.skip('POST /destinations should add a new destination', async () => {
     const seychelles = {
       country: 'Seychelles',
       monthly_expenses: 2400,
@@ -130,6 +130,17 @@ describe('destination routes', () => {
         "visa_cost": 55,
       }
     `);
+  });
+
+  it('PUT /destinations/1 should update destination with ID #1', async () => {
+    const res = await request(app).put('/destinations/1').send({
+      country: 'Seychelles',
+      monthly_expenses: 2400,
+      language: 'English',
+      income_req: 4500,
+      visa_cost: 55,
+    });
+    expect(res.status).toBe(200);
   });
 
   afterAll(() => {

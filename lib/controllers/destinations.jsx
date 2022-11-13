@@ -26,4 +26,12 @@ module.exports = Router()
     } catch (e) {
       next(e);
     }
+  })
+  .put('/:id', async (req, res, next) => {
+    try {
+      const updatedDest = await Destination.update(req.params.id, req.body);
+      res.json(updatedDest);
+    } catch (e) {
+      next(e);
+    }
   });

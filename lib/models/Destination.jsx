@@ -51,4 +51,27 @@ module.exports = class Destination {
     );
     return new Destination(rows[0]);
   }
+
+  static async update(id, newAttrs) {
+    const destination = Destination.getDestinationById(id);
+    if (!destination) return null;
+    const updatedDestination = { ...destination, ...newAttrs };
+    const { rows } = await pool.query(
+      `
+        UPDATE destinations
+        SET country = $2, monthly_expenses = $3, language = $4, income_req = $5, visa_cost = $6
+        WHERE id = $1
+        RETURNING *
+        `,
+      [
+        id,
+        updatedDestination.country,
+        updatedDestination.monthly_expenses,
+        updatedDestination.language,
+        updatedDestination.income_req,
+        updatedDestination.visa_cost,
+      ]
+    );
+    return new Destination(rows[0]);
+  }
 };
