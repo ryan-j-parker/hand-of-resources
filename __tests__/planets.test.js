@@ -2,14 +2,13 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
-const { Planet } = require('../lib/models/Planet');
 
 describe('planets routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
 
-  it.skip('GET /planets should return a list of planets', async () => {
+  it('GET /planets should return a list of planets', async () => {
     const res = await request(app).get('/planets');
     expect(res.status).toBe(200);
     expect(res.body).toMatchInlineSnapshot(`
@@ -90,14 +89,14 @@ describe('planets routes', () => {
     `);
   });
 
-  it.skip('GET /planets/1 should return planet with ID #1', async () => {
+  it('GET /planets/1 should return planet with ID #1', async () => {
     const res = await request(app).get('/planets/1');
     expect(res.status).toBe(200);
     expect(res.body).toHaveProperty('name', 'Mercury');
     expect(res.body).toHaveProperty('temperature', 400);
   });
 
-  it.skip('POST /planets should add a new planet to database', async () => {
+  it('POST /planets should add a new planet to database', async () => {
     const planetX = {
       name: 'Planet X',
       mass: 0.0999,
@@ -119,7 +118,7 @@ describe('planets routes', () => {
     `);
   });
 
-  it.skip('PUT /planets/9 should update planet with ID #9', async () => {
+  it('PUT /planets/9 should update planet with ID #9', async () => {
     const res = await request(app).put('/planets/9').send({
       name: 'Alien Home Planet',
       mass: 0.99822,

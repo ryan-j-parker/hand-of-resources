@@ -8,7 +8,7 @@ describe('gangs routes', () => {
     return setup(pool);
   });
 
-  it.skip('GET /gangs should return a list of 19th C. NY gangs', async () => {
+  it('GET /gangs should return a list of 19th C. NY gangs', async () => {
     const res = await request(app).get('/gangs');
     expect(res.status).toBe(200);
     expect(res.body).toMatchInlineSnapshot(`
@@ -80,14 +80,14 @@ describe('gangs routes', () => {
     `);
   });
 
-  it.skip('GET /gangs/1 should return the NY gang with ID #1', async () => {
+  it('GET /gangs/1 should return the NY gang with ID #1', async () => {
     const res = await request(app).get('/gangs/1');
     expect(res.status).toBe(200);
     expect(res.body).toHaveProperty('name', 'Forty Thieves');
     expect(res.body).toHaveProperty('formed', 1825);
   });
 
-  it.skip('POST /gangs should add a new gang entry to database', async () => {
+  it('POST /gangs should add a new gang entry to database', async () => {
     const kerry = {
       name: 'Kerryonians',
       formed: 1825,
@@ -112,7 +112,7 @@ describe('gangs routes', () => {
   });
 
   //
-  it.skip('PUT /gangs/1 should update gang with ID #1', async () => {
+  it('PUT /gangs/1 should update gang with ID #1', async () => {
     const res = await request(app).put('/gangs/1').send({
       name: 'Five Points Gang',
       formed: 1890,
@@ -135,7 +135,7 @@ describe('gangs routes', () => {
     `);
   });
 
-  it.skip('DELETE /gangs/1 should delete gang with ID #1', async () => {
+  it('DELETE /gangs/1 should delete gang with ID #1', async () => {
     const res = await request(app).delete('/gangs/1');
     expect(res.status).toEqual(200);
     const { gang } = await request(app).get('/gangs/1');

@@ -8,7 +8,7 @@ describe('destination routes', () => {
     return setup(pool);
   });
 
-  it.skip('GET /destinations should return a list of digital expat destinations', async () => {
+  it('GET /destinations should return a list of digital expat destinations', async () => {
     const res = await request(app).get('/destinations');
     expect(res.status).toBe(200);
     expect(res.body).toMatchInlineSnapshot(`
@@ -97,7 +97,7 @@ describe('destination routes', () => {
     `);
   });
 
-  it.skip('GET /destinations/1 should return destination with ID #1', async () => {
+  it('GET /destinations/1 should return destination with ID #1', async () => {
     const res = await request(app).get('/destinations/1');
     expect(res.status).toEqual(200);
     expect(res.body).toEqual({
@@ -110,7 +110,7 @@ describe('destination routes', () => {
     });
   });
 
-  it.skip('POST /destinations should add a new destination', async () => {
+  it('POST /destinations should add a new destination', async () => {
     const seychelles = {
       country: 'Seychelles',
       monthly_expenses: 2400,
@@ -132,7 +132,7 @@ describe('destination routes', () => {
     `);
   });
 
-  it.skip('PUT /destinations/1 should update destination with ID #1', async () => {
+  it('PUT /destinations/1 should update destination with ID #1', async () => {
     const res = await request(app).put('/destinations/1').send({
       country: 'Seychelles',
       monthly_expenses: 2400,
@@ -143,7 +143,7 @@ describe('destination routes', () => {
     expect(res.status).toBe(200);
   });
 
-  it.skip('DELETE /destinations/:id should delete a destination', async () => {
+  it('DELETE /destinations/:id should delete a destination', async () => {
     const res = await request(app).delete('/destinations/8');
     expect(res.status).toEqual(200);
     const { dest } = await request(app).get('/destinations/8');
