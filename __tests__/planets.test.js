@@ -132,8 +132,8 @@ describe('planets routes', () => {
 
   it('DELETE /planets/:id should delete a planet', async () => {
     const res = await request(app).delete('/planets/9');
-    expect(res.status).toEqual(204);
-    const { planet } = await Planet.getPlanetById(9);
+    expect(res.status).toEqual(200);
+    const { planet } = await request(app).get('/planets/9');
     expect(planet).toEqual(undefined);
   });
 
